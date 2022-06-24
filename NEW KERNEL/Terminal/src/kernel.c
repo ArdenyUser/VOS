@@ -59,7 +59,7 @@ void shutdown() {
 
 void kmain() {
     char buffer[255];
-    const char *shell = "shell@os>";
+    const char *shell = "vos>";
 
     gdt_init();
     idt_init();
@@ -67,7 +67,7 @@ void kmain() {
     console_init(COLOR_WHITE, COLOR_BLACK);
     keyboard_init();
 
-    printf("starting terminal...\n");
+    printf("starting Visix Operating System...\n");
     while(1) {
         printf(shell);
         memset(buffer, 0, sizeof(buffer));
@@ -77,11 +77,13 @@ void kmain() {
         if(strcmp(buffer, "cpuid") == 0) {
             cpuid_info(1);
         } else if(strcmp(buffer, "help") == 0) {
-            printf("Tiny OS Terminal\n");
+            printf("Visix Operating System\n");
             printf("Commands: help, cpuid, echo, shutdown\n");
         } else if(is_echo(buffer)) {
             printf("%s\n", buffer + 5);
         } else if(strcmp(buffer, "shutdown") == 0) {
+            shutdown();
+        } else if(strcmp(buffer, "shitdown") == 0) {
             shutdown();
         } else {
             printf("invalid command: %s\n", buffer);
